@@ -4,6 +4,7 @@ from typing import List
 import zmq, msgpack
 import traceback
 import logging
+import json
 logging.basicConfig(filename='app.log', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 logging.info('starting')
 
@@ -24,6 +25,9 @@ class ConnectionManager:
 
     async def send_personal_message(self, message: str, websocket: WebSocket):
         await websocket.send_text(message)
+    async def send_JSON_message(self, message, websocket: WebSocket):
+        await websocket.send(json.dumps(message));
+
 
     async def broadcast(self, message: str):
         for connection in self.active_connections:
@@ -60,8 +64,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             # if type(eval(message)) == str:
             # if type(message) == str
             # await manager.send_personal_message(message, websocket)
-            await manager.send_personal_message(frame, websocket)
-            print(f"send_personal_message succeeded")
+            # await manager.send_personal_message(frame, websocket)
+            await manager.send_JSON_message(frame, websocket)
+            print(f"send_message succeeded")
             await asyncio.sleep(0.01)
 
     except Exception as e:
