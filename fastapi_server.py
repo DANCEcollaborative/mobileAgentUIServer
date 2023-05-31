@@ -64,8 +64,9 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             # if type(eval(message)) == str:
             # if type(message) == str
             # await manager.send_personal_message(message, websocket)
-            # await manager.send_personal_message(frame, websocket)
-            await manager.send_JSON_message(frame, websocket)
+            await manager.send_personal_message(frame, websocket)
+            # await manager.send_JSON_message(frame, websocket)
+            await manager.send_personal_message("location:front", websocket)
             print(f"send_message succeeded")
             await asyncio.sleep(0.01)
 
