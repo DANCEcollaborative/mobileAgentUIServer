@@ -61,6 +61,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             # if type(message) == str
             # await manager.send_personal_message(message, websocket)
             await manager.send_personal_message(frame, websocket)
+            print(f"send_personal_message succeeded")
             await asyncio.sleep(0.01)
 
     except Exception as e:
