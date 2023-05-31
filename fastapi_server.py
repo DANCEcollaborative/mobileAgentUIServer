@@ -52,9 +52,11 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
             print(f"[{client_id}] Waiting for zeromq input...")
             frame, originatingTime = readFrame(input)
             print(f"readFrame succeeded")
-            print(f"Received from PSI: {frame.decode()}, {originatingTime}")
-            print(f"console log of 'Received from PSI: ...' succeeded")
-            message = f"{{\"location\":{1}, \"speech\":\"{frame.decode()}\"}}"
+            print(frame)
+            print(f"print(frame) succeeded")
+            # print(f"Received from PSI: {frame.decode()}, {originatingTime}")
+            # print(f"console log of 'Received from PSI: ...' succeeded")
+            # message = f"{{\"location\":{1}, \"speech\":\"{frame.decode()}\"}}"
             # if type(eval(message)) == str:
             # if type(message) == str
             await manager.send_personal_message(message, websocket)
