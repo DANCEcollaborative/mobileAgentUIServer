@@ -51,6 +51,7 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
         while True:
             print(f"[{client_id}] Waiting for zeromq input...")
             frame, originatingTime = readFrame(input)
+            print(f"readFrame succeeded")
             print(f"Received from PSI: {frame.decode()}, {originatingTime}")
             message = f"{{\"flag\":{1}, \"message\":\"{frame.decode()}\"}}"
             # if type(eval(message)) == str:
